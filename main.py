@@ -10,8 +10,10 @@ from sys import exit
 
 gameactive = True
 screen = pygame.display.set_mode((600,600))
+clock = pygame.time.Clock()
 
-#playerrect = pygame.rect()
+playerrect = pygame.Rect(500,300, 50, 100)
+enemyrect = pygame.Rect(200,300, 50, 100)
 
 while gameactive:
     for event in pygame.event.get():
@@ -19,11 +21,9 @@ while gameactive:
             pygame.quit
             exit()
         if gameactive == True:
-            pass
+            #draw all entities
+            pygame.draw.rect(screen, 'orange', playerrect)
+            pygame.draw.rect(screen, 'orange', enemyrect)
 
-
-
-
-
-
-
+    pygame.display.update()
+    clock.tick(60)
