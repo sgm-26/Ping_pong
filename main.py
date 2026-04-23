@@ -12,8 +12,8 @@ gameactive = True
 screen = pygame.display.set_mode((600,600))
 clock = pygame.time.Clock()
 
-playerrect = pygame.Rect(500,300, 50, 100)
-enemyrect = pygame.Rect(200,300, 50, 100)
+playerrect = pygame.Rect(500,200, 50, 150)
+enemyrect = pygame.Rect(50,200, 50, 150)
 
 while gameactive:
     for event in pygame.event.get():
