@@ -15,13 +15,29 @@ clock = pygame.time.Clock()
 playerrect = pygame.Rect(500,200, 50, 150)
 enemyrect = pygame.Rect(50,200, 50, 150)
 
+def ball_ai():
+    pass
+
 while gameactive:
+
+    #MAIN EVENT LOOP
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit
             exit()
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_UP:
+                playerrect.y -= 10
+            elif event.key == pygame.K_DOWN:
+                playerrect.y += 10
+
+        # black background and clears screen bec no bg now
+        screen.fill((0, 0, 0))  
+
+
         if gameactive == True:
             #draw all entities
+
             pygame.draw.rect(screen, 'orange', playerrect)
             pygame.draw.rect(screen, 'orange', enemyrect)
 
