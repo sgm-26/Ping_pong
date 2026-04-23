@@ -14,6 +14,8 @@ clock = pygame.time.Clock()
 
 playerrect = pygame.Rect(500,200, 50, 150)
 enemyrect = pygame.Rect(50,200, 50, 150)
+ballpos = (300,300)
+ballrad = 15
 
 def ball_ai():
     pass
@@ -40,6 +42,7 @@ while gameactive:
 
             pygame.draw.rect(screen, 'orange', playerrect)
             pygame.draw.rect(screen, 'orange', enemyrect)
+            pygame.draw.circle(screen, 'yellow', ballpos, ballrad)
 
     pygame.display.update()
     clock.tick(60)
