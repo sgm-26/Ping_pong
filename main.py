@@ -4,6 +4,7 @@
 #and also coding gives more joy than gaming! so now i will leave gaming and full time think about coding!
 #AND ALSO USING GIT FOR FIRST TIME IN REAL GAME
 
+# GAME SHUTDOWN DEADLINE TILL SUNDAY OF MAY so 1 whole week to properly do this complex game bec its really good knowledge
 
 import pygame
 from sys import exit
@@ -20,12 +21,12 @@ enemyrect = pygame.Rect(50,200, 50, 150)
 ballx = 300
 bally = 300
 ballrad = 15
-balldirec = 2
+balldirec = 2 #or ball speed
 
 
 #BUG HERE
 def ball_ai():
-    global ballx, balldirec, ballrect
+    global ballx, balldirec, ballrect, ballrectx
 
     ballx += balldirec
 
@@ -33,8 +34,15 @@ def ball_ai():
     #    balldirec = -(balldirec)
 
     if playerrect.colliderect(ballrect):
+        # BUGFIX - I made it 470 bec ball diameter is 30 and player x is 500, 
+        # so to avoid vibrating glitch -
+        # whenever collision happens I instantly remove ball from player paddle so it doesnt vibrate and moves normally
+        ballx = 470
+
+        #reverse ball direction -
         balldirec = -(balldirec)
-        print('collision')
+        #print('collision')
+        #print(balldirec)
     
 
 
