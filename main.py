@@ -23,17 +23,16 @@ playdirec = 'none'
 ballx = 300
 bally = 300
 ballrad = 15
-balldirec = 2 #or ball speed
-
+balldirec = 2 #or ball speed, later make this based on whoever won last round should get served ball
+balldirecy = 0
 
 #BUG HERE
 def ball_ai():
-    global ballx, balldirec, ballrect, ballrectx
+    global ballx,bally, balldirec,balldirecy, ballrect, ballrectx, playdirec
 
+    #moving the ball towards player only when no collision
     ballx += balldirec
-
-    #if playerrect.collidepoint((ballx, bally)):
-    #    balldirec = -(balldirec)
+    bally += balldirecy
 
     if playerrect.colliderect(ballrect) and ballx == 500:
         # BUGFIX ^ - added another condition that ballx should be 500,
@@ -45,14 +44,17 @@ def ball_ai():
         ballx = 470
 
         #reverse ball direction -
-        balldirec = -(balldirec)
-        #print('collision')
-        #print(balldirec)
-
-    #if 
     
+        if playdirec == 'up':
+            #so now ball should go up diagonally
+            balldirec = -(balldirec) #reversing ball x direction
+            balldirecy = -2
+        elif playdirec == 'down':
+            #so now ball should go down diagonally
+            balldirec = -(balldirec) #reversing ball x direction
+            balldirecy = 2
 
-
+        
 def enemyai():
     pass
 
@@ -74,9 +76,12 @@ while gameactive:
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_UP:
                 playerrect.y -= 20
-
+                playdirec = 'up'
+                #print(playdirec)
             elif event.key == pygame.K_DOWN:
                 playerrect.y += 20
+                playdirec = 'down'
+                #print(playdirec)
 
 
     # black background and clears screen bec no bg now
