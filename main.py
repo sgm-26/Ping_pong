@@ -18,6 +18,8 @@ clock = pygame.time.Clock()
 playerrect = pygame.Rect(500,200, 50, 150)
 enemyrect = pygame.Rect(50,200, 50, 150)
 
+playdirec = 'none'
+
 ballx = 300
 bally = 300
 ballrad = 15
@@ -33,8 +35,11 @@ def ball_ai():
     #if playerrect.collidepoint((ballx, bally)):
     #    balldirec = -(balldirec)
 
-    if playerrect.colliderect(ballrect):
-        # BUGFIX - I made it 470 bec ball diameter is 30 and player x is 500, 
+    if playerrect.colliderect(ballrect) and ballx == 500:
+        # BUGFIX ^ - added another condition that ballx should be 500,
+        #  so only front of player board can hit ball
+
+        # BUGFIX below- I made it 470 bec ball diameter is 30 and player x is 500, 
         # so to avoid vibrating glitch -
         # whenever collision happens I instantly remove ball from player paddle so it doesnt vibrate and moves normally
         ballx = 470
@@ -43,6 +48,8 @@ def ball_ai():
         balldirec = -(balldirec)
         #print('collision')
         #print(balldirec)
+
+    #if 
     
 
 
@@ -67,8 +74,10 @@ while gameactive:
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_UP:
                 playerrect.y -= 20
+
             elif event.key == pygame.K_DOWN:
                 playerrect.y += 20
+
 
     # black background and clears screen bec no bg now
     screen.fill((0, 0, 0))  
@@ -81,11 +90,11 @@ while gameactive:
     if gameactive == True:
         #draw all entities
 
-        pygame.draw.rect(screen, 'orange', playerrect)
-        pygame.draw.rect(screen, 'orange', enemyrect)
-
         pygame.draw.rect(screen, 'white', ballrect) #hitbox rect of ball
         pygame.draw.circle(screen, 'yellow', (ballx, bally), ballrad)
+
+        pygame.draw.rect(screen, 'orange', playerrect)
+        pygame.draw.rect(screen, 'orange', enemyrect)
         
 
     pygame.display.update()
