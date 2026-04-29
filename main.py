@@ -18,7 +18,7 @@ clock = pygame.time.Clock()
 playerrect = pygame.Rect(500,200, 50, 150)
 enemyrect = pygame.Rect(50,200, 50, 150)
 
-playdirec = 'none'
+playdirec = 'still'
 
 ballx = 300
 bally = 300
@@ -53,6 +53,9 @@ def ball_ai():
             #so now ball should go down diagonally
             balldirec = -(balldirec) #reversing ball x direction
             balldirecy = 2
+        elif playdirec == 'still':
+            #so now ball should go straight
+            balldirec = -(balldirec) #reversing ball x direction
 
         
 def enemyai():
@@ -89,8 +92,6 @@ while gameactive:
 
     #animations
     ball_ai()
-    
-
 
     if gameactive == True:
         #draw all entities
