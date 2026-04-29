@@ -64,9 +64,8 @@ def ball_ai():
             #so now ball should go straight
             balldirec = -(balldirec) #reversing ball x direction
 
-        
-def enemyai():
-    global ballx,bally, balldirec,balldirecy, ballrect, ballrectx, oppdirec
+    # FIRST BASIC BOUNCE MECHANIC for enemy, copied from ball ai for player
+
     #enemyrect.x += 1
     if ballserve == 'enemy':
         ballx -= balldirec
@@ -78,6 +77,13 @@ def enemyai():
 
         if oppdirec == 'still':
             balldirec = -(balldirec)
+
+        
+def enemyai():
+    global ballx,bally, balldirec,balldirecy, ballrect, ballrectx, oppdirec
+    #moved all enemy ball logic to ball ai bec i realised all ball logic should be there only
+
+    
 
 
 
