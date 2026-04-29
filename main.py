@@ -12,6 +12,9 @@ from sys import exit
 #ALL VARIABLES AND DECLARATION/CREATION OF STUFF
 
 gameactive = True
+difficulty = 'hard'
+
+#WINDOW
 screen = pygame.display.set_mode((600,600))
 clock = pygame.time.Clock()
 
