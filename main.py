@@ -13,6 +13,7 @@ from sys import exit
 
 gameactive = True
 difficulty = 'hard'
+ballserve = "player"
 
 #WINDOW
 screen = pygame.display.set_mode((600,600))
@@ -22,6 +23,7 @@ playerrect = pygame.Rect(500,200, 50, 150)
 enemyrect = pygame.Rect(50,200, 50, 150)
 
 playdirec = 'still'
+oppdirec = 'still'
 
 ballx = 300
 bally = 300
@@ -34,8 +36,9 @@ def ball_ai():
     global ballx,bally, balldirec,balldirecy, ballrect, ballrectx, playdirec
 
     #moving the ball towards player only when no collision
-    ballx += balldirec
-    bally += balldirecy
+    if ballserve == 'player':
+        ballx += balldirec
+        bally += balldirecy
 
     if playerrect.colliderect(ballrect) and ballx == 500:
         # BUGFIX ^ - added another condition that ballx should be 500,
@@ -62,7 +65,11 @@ def ball_ai():
 
         
 def enemyai():
-    enemyrect.x += 1
+    global ballx,bally, balldirec,balldirecy, ballrect, ballrectx, oppdirec
+    #enemyrect.x += 1
+    if ballserve == 'enemy':
+        ballx -= balldirec
+        bally += balldirecy
 
 #MAIN GAME WHILE LOOP
 while gameactive:
