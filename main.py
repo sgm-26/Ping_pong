@@ -15,10 +15,11 @@ gameactive = True
 difficulty = 'hard'
 ballserve = "player"
 
-#WINDOW
+# WINDOW
 screen = pygame.display.set_mode((600,600))
 clock = pygame.time.Clock()
 
+# MAIN RECTANGLES
 playerrect = pygame.Rect(500,200, 50, 150)
 enemyrect = pygame.Rect(50,200, 50, 150)
 
@@ -70,6 +71,17 @@ def enemyai():
     if ballserve == 'enemy':
         ballx -= balldirec
         bally += balldirecy
+
+    if enemyrect.colliderect(ballrect) and ballx == 100:  #enemy pos = 50 and width = 50 so 100
+
+        ballx = 100 #no changes req for enemy rect
+
+        if oppdirec == 'still':
+            balldirec = -(balldirec)
+
+
+
+    
 
 #MAIN GAME WHILE LOOP
 while gameactive:
