@@ -62,7 +62,7 @@ def ball_ai():
 
         
 def enemyai():
-    pass
+    enemyrect.x += 1
 
 #MAIN GAME WHILE LOOP
 while gameactive:
@@ -95,6 +95,7 @@ while gameactive:
 
     #animations
     ball_ai()
+    enemyai()
 
     if gameactive == True:
         #draw all entities
