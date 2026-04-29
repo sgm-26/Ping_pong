@@ -24,7 +24,7 @@ playerrect = pygame.Rect(500,200, 50, 150)
 enemyrect = pygame.Rect(50,200, 50, 150)
 
 playdirec = 'still'
-oppdirec = 'still'
+endirec = 'still'
 
 ballx = 300
 bally = 300
@@ -34,7 +34,7 @@ balldirecy = 0
 
 #BUG HERE
 def ball_ai():
-    global ballx,bally, balldirec,balldirecy, ballrect, ballrectx, playdirec
+    global ballx,bally, balldirec,balldirecy, ballrect, ballrectx, playdirec, endirec
 
     #moving the ball towards player only when no collision
     if ballserve == 'player':
@@ -75,20 +75,28 @@ def ball_ai():
 
         ballx = 100 #no changes req for enemy rect
 
-        if oppdirec == 'still':
-            balldirec = -(balldirec)
+        #if oppdirec == 'still':
+        #    balldirec = -(balldirec)
+
+        if endirec == 'up':
+            #so now ball should go up diagonally
+            balldirec = -(balldirec) #reversing ball x direction
+            balldirecy = -2    
+        elif endirec == 'down':
+            #so now ball should go down diagonally
+            balldirec = -(balldirec) #reversing ball x direction
+            balldirecy = 2   
+        elif endirec == 'still':
+            #so now ball should go straight
+            balldirec = -(balldirec) #reversing ball x direction
 
         
 def enemyai():
-    global ballx,bally, balldirec,balldirecy, ballrect, ballrectx, oppdirec
+    #global ballx,bally, balldirec,balldirecy, ballrect, ballrectx, oppdirec
     #moved all enemy ball logic to ball ai bec i realised all ball logic should be there only
+    pass
 
     
-
-
-
-    
-
 #MAIN GAME WHILE LOOP
 while gameactive:
 
@@ -113,6 +121,12 @@ while gameactive:
                 playerrect.y += 20
                 playdirec = 'down'
                 #print(playdirec)
+            elif event.key == pygame.K_w:
+                enemyrect.y -= 20
+                endirec = 'up'
+            elif event.key == pygame.K_s:
+                enemyrect.y += 20
+                endirec = 'down'
 
 
     # black background and clears screen bec no bg now
