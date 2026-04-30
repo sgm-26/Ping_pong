@@ -32,9 +32,10 @@ ballrad = 15
 balldirec = 2 #or ball speed, later make this based on whoever won last round should get served ball
 balldirecy = 0
 
-#BUG HERE
 def ball_ai():
     global ballx,bally, balldirec,balldirecy, ballrect, ballrectx, playdirec, endirec
+
+    #PLAYER based bounce back
 
     #moving the ball towards player only when no collision
     if ballserve == 'player':
@@ -64,7 +65,7 @@ def ball_ai():
             #so now ball should go straight
             balldirec = -(balldirec) #reversing ball x direction
 
-    # FIRST BASIC BOUNCE MECHANIC for enemy, copied from ball ai for player
+    # ENEMY based bounce back
 
     #enemyrect.x += 1
     if ballserve == 'enemy':
@@ -90,6 +91,13 @@ def ball_ai():
             #so now ball should go straight
             balldirec = -(balldirec) #reversing ball x direction
 
+    # Game screen boundary based bounce back
+
+    if ballrect.top < 0:  # top boundary
+        balldirecy = 2
+    elif ballrect.bottom > 600:
+        balldirecy = -2   # bottom boundary
+        
         
 def enemyai():
     #global ballx,bally, balldirec,balldirecy, ballrect, ballrectx, oppdirec
@@ -107,7 +115,7 @@ while gameactive:
     ballrect = pygame.Rect(ballrectx, ballrecty, (ballrad * 2), (ballrad * 2))
     
 
-    #MAIN EVENT LOOP
+    # MAIN EVENT LOOP and CONTROLS
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit
