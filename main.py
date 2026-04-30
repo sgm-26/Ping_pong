@@ -16,30 +16,31 @@ difficulty = 'hard'
 ballserve = "player"
 
 # WINDOW
-screenw = 600
+screenw = 900
 screenh = 600
 screen = pygame.display.set_mode((screenw,screenh))
 clock = pygame.time.Clock()
 
 # MAIN RECTANGLES
 # player and enemy adjustable x positions
-playPos = 500 
-oppPos = 50
-playerheight = enemyheight = 150
-playerrect = pygame.Rect(playPos,200, 50, playerheight)
-enemyrect = pygame.Rect(playPos,200, 50, enemyheight)
+playX = 800 
+oppX = 100
+playY = oppY = 200
+playerheight = enemyheight = 200
+playerrect = pygame.Rect(playX,playY, 50, playerheight)
+enemyrect = pygame.Rect(oppX,oppY, 50, enemyheight)
 
 playdirec = 'still'
 endirec = 'still'
 
-ballx = 300
-bally = 300
+ballx = (screenw / 2)
+bally = (screenh / 2)
 ballrad = 15
 balldirec = 2 #or ball speed, later make this based on whoever won last round should get served ball
 balldirecy = 0
 
 def ball_ai():
-    global ballx,bally, balldirec,balldirecy, ballrect, ballrectx, playdirec, endirec
+    global ballx,bally, balldirec,balldirecy, ballrect, ballrectx, playdirec, endirec, playX, oppX
 
     #PLAYER based bounce back
 
@@ -48,14 +49,10 @@ def ball_ai():
         ballx += balldirec
         bally += balldirecy
 
-    if playerrect.colliderect(ballrect) and ballx == 500:
-        # BUGFIX ^ - added another condition that ballx should be 500,
-        #  so only front of player board can hit ball
-
-        # BUGFIX below- I made it 470 bec ball diameter is 30 and player x is 500, 
-        # so to avoid vibrating glitch -
-        # whenever collision happens I instantly remove ball from player paddle so it doesnt vibrate and moves normally
-        ballx = 470
+    if playerrect.colliderect(ballrect) and ballx == playX:
+        # softcoded all variables instead of hard number values now so logic is also easier to understand
+        # and you don't have to keep changing all variables because of one varibale change
+        ballx = playerrect.left - (ballrad * 2)
 
         #reverse ball direction -
     
@@ -78,9 +75,9 @@ def ball_ai():
         ballx -= balldirec
         bally += balldirecy
 
-    if enemyrect.colliderect(ballrect) and ballx == 100:  #enemy pos = 50 and width = 50 so 100
+    if enemyrect.colliderect(ballrect) and ballx == enemyrect.right:  #enemy can only hit from its front, which is right side of its rect
 
-        ballx = 100 #no changes req for enemy rect
+        ballx = ballx #no changes req for enemy rect
 
         #if oppdirec == 'still':
         #    balldirec = -(balldirec)
@@ -141,6 +138,9 @@ while gameactive:
             elif event.key == pygame.K_s:
                 enemyrect.y += 20
                 endirec = 'down'
+        if event.type == pygame.MOUSEMOTION:
+            mousepos = event.pos
+            #print(mousepos)  # only for debug or finding correct placement, not really needed that much
 
 
     # black background and clears screen bec no bg now
@@ -154,10 +154,10 @@ while gameactive:
         #draw all entities
 
         pygame.draw.rect(screen, 'white', ballrect) #hitbox rect of ball
-        pygame.draw.circle(screen, 'yellow', (ballx, bally), ballrad)
+        pygame.draw.circle(screen, 'yellow', (ballx, bally), ballrad) #main ball
 
-        pygame.draw.rect(screen, 'orange', playerrect)
-        pygame.draw.rect(screen, 'orange', enemyrect)
+        pygame.draw.rect(screen, 'orange', playerrect) # player board
+        pygame.draw.rect(screen, 'orange', enemyrect) # opp board
         
 
     pygame.display.update()
