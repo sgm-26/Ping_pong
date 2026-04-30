@@ -16,7 +16,9 @@ difficulty = 'hard'
 ballserve = "player"
 
 # WINDOW
-screen = pygame.display.set_mode((600,600))
+screenw = 600
+screenh = 600
+screen = pygame.display.set_mode((screenw,screenh))
 clock = pygame.time.Clock()
 
 # MAIN RECTANGLES
