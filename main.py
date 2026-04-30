@@ -22,8 +22,12 @@ screen = pygame.display.set_mode((screenw,screenh))
 clock = pygame.time.Clock()
 
 # MAIN RECTANGLES
-playerrect = pygame.Rect(500,200, 50, 150)
-enemyrect = pygame.Rect(50,200, 50, 150)
+# player and enemy adjustable x positions
+playPos = 500 
+oppPos = 50
+playerheight = enemyheight = 150
+playerrect = pygame.Rect(playPos,200, 50, playerheight)
+enemyrect = pygame.Rect(playPos,200, 50, enemyheight)
 
 playdirec = 'still'
 endirec = 'still'
