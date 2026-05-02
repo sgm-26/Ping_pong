@@ -36,11 +36,12 @@ endirec = 'still'
 ballx = (screenw / 2)
 bally = (screenh / 2)
 ballrad = 15
-balldirec = 2 #or ball speed, later make this based on whoever won last round should get served ball
+ballspeed = 5
+balldirec = ballspeed #or BALL SPEED, later make this based on whoever won last round should get served ball
 balldirecy = 0
 
 def ball_ai():
-    global ballx,bally, balldirec,balldirecy, ballrect, ballrectx, playdirec, endirec, playX, oppX
+    global ballx,bally, balldirec,balldirecy, ballrect, ballrectx, playdirec, endirec, playX, oppX, ballspeed
 
     #PLAYER based bounce back
 
@@ -55,15 +56,16 @@ def ball_ai():
         ballx = playerrect.left - (ballrad * 2)
 
         #reverse ball direction -
+        # IMP - full softcoding now bec realised now that its better and bec i want to change ball speeed  
     
         if playdirec == 'up':
             #so now ball should go up diagonally
             balldirec = -(balldirec) #reversing ball x direction
-            balldirecy = -2
+            balldirecy = balldirec  # means 2 same as og
         elif playdirec == 'down':
             #so now ball should go down diagonally
             balldirec = -(balldirec) #reversing ball x direction
-            balldirecy = 2
+            balldirecy = -(balldirec)
         elif playdirec == 'still':
             #so now ball should go straight
             balldirec = -(balldirec) #reversing ball x direction
@@ -85,21 +87,22 @@ def ball_ai():
         if endirec == 'up':
             #so now ball should go up diagonally
             balldirec = -(balldirec) #reversing ball x direction
-            balldirecy = -2    
+            balldirecy = -(balldirec)   
         elif endirec == 'down':
             #so now ball should go down diagonally
             balldirec = -(balldirec) #reversing ball x direction
-            balldirecy = 2   
+            balldirecy = balldirec   
         elif endirec == 'still':
             #so now ball should go straight
             balldirec = -(balldirec) #reversing ball x direction
 
     # Game screen boundary based bounce back
+    # BUG HERE - ball y is vibrating like before but now on game srufce, will try with same bugfix as before
 
     if ballrect.top < 0:  # top boundary
-        balldirecy = 2
-    elif ballrect.bottom > 600:
-        balldirecy = -2   # bottom boundary
+        balldirecy = ballspeed
+    elif ballrect.bottom > screenh:
+        balldirecy = -(ballspeed)   # bottom boundary
         
         
 def enemyai():
@@ -158,6 +161,8 @@ while gameactive:
 
         pygame.draw.rect(screen, 'orange', playerrect) # player board
         pygame.draw.rect(screen, 'orange', enemyrect) # opp board
+        #print("balldirec x:", balldirec)
+        print("balldirec y:", balldirecy)
         
 
     pygame.display.update()
