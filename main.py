@@ -47,9 +47,10 @@ ballrad = 15
 ballspeed = 5
 balldirec = ballspeed #or BALL SPEED, later make this based on whoever won last round should get served ball
 balldirecy = 0
+ballyadd = 3.5
 
 def ball_ai():
-    global ballx,bally, balldirec,balldirecy, ballrect, ballrectx, playdirec, endirec, playX, oppX, ballspeed
+    global ballx,bally, balldirec,balldirecy, ballrect, ballrectx, playdirec, endirec, playX, oppX, ballspeed, ballyadd
 
     #PLAYER based bounce back
 
@@ -69,11 +70,11 @@ def ball_ai():
         if playdirec == 'up':
             #so now ball should go up diagonally
             balldirec = -(balldirec) #reversing ball x direction
-            balldirecy = balldirec  # means 2 same as og
+            balldirecy = -(ballyadd)  # means 2 same as og
         elif playdirec == 'down':
             #so now ball should go down diagonally
             balldirec = -(balldirec) #reversing ball x direction
-            balldirecy = -(balldirec)
+            balldirecy = (ballyadd)
         elif playdirec == 'still':
             #so now ball should go straight
             balldirec = -(balldirec) #reversing ball x direction
@@ -87,7 +88,7 @@ def ball_ai():
 
     if enemyrect.colliderect(ballrect) and ballx == enemyrect.right:  #enemy can only hit from its front, which is right side of its rect
 
-        ballx = ballx #no changes req for enemy rect
+        #ballx = ballx #no changes req for enemy rect
 
         #if oppdirec == 'still':
         #    balldirec = -(balldirec)
@@ -95,17 +96,18 @@ def ball_ai():
         if endirec == 'up':
             #so now ball should go up diagonally
             balldirec = -(balldirec) #reversing ball x direction
-            balldirecy = -(balldirec)   
+            balldirecy = -(ballyadd)   
         elif endirec == 'down':
             #so now ball should go down diagonally
             balldirec = -(balldirec) #reversing ball x direction
-            balldirecy = balldirec   
+            balldirecy = ballyadd   
         elif endirec == 'still':
             #so now ball should go straight
             balldirec = -(balldirec) #reversing ball x direction
 
     # Game screen boundary based bounce back
     # BUG HERE - ball y is vibrating like before but now on game srufce, will try with same bugfix as before
+    # fixed by avoiding problem and just using a new variable, bad method tbh
 
     if ballrect.top < 0:  # top boundary
         balldirecy = ballspeed
