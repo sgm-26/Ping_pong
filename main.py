@@ -149,6 +149,9 @@ while gameactive:
             elif event.key == pygame.K_s:
                 enemyrect.y += 20
                 endirec = 'down'
+            elif event.key == pygame.K_ESCAPE:
+                pygame.quit
+                exit()
         if event.type == pygame.MOUSEMOTION:
             mousepos = event.pos
             #print(mousepos)  # only for debug or finding correct placement, not really needed that much
