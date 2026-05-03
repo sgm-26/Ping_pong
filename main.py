@@ -26,7 +26,7 @@ clock = pygame.time.Clock()
 playX = 800 
 oppX = 100
 playY = oppY = 200
-playerheight = enemyheight = 200
+playerheight = enemyheight = 150
 playerrect = pygame.Rect(playX,playY, 50, playerheight)
 enemyrect = pygame.Rect(oppX,oppY, 50, enemyheight)
 
@@ -162,7 +162,7 @@ while gameactive:
         pygame.draw.rect(screen, 'orange', playerrect) # player board
         pygame.draw.rect(screen, 'orange', enemyrect) # opp board
         #print("balldirec x:", balldirec)
-        print("balldirec y:", balldirecy)
+        #print("balldirec y:", balldirecy)
         
 
     pygame.display.update()
