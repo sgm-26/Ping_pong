@@ -8,14 +8,14 @@
 
 import pygame
 from sys import exit
+import random
 
 pygame.init()
 #ALL VARIABLES AND DECLARATION/CREATION OF STUFF
 
 gameactive = True
 myFONT = pygame.font.Font(None, 70)
-playS = 0
-oppS = 0
+
 difficulty = 'hard'
 ballserve = "player"
 
@@ -34,10 +34,6 @@ playerheight = enemyheight = 120
 playerrect = pygame.Rect(playX,playY, 50, playerheight)
 enemyrect = pygame.Rect(oppX,oppY, 50, enemyheight)
 
-#SCORES
-playerscore = myFONT.render(f'{playS}', False, 'white')
-enemyscore = myFONT.render(f'{oppS}', False, 'white')
-
 playdirec = 'still'
 endirec = 'still'
 
@@ -50,7 +46,7 @@ balldirecy = 0
 ballyadd = 3.5
 
 def ball_ai():
-    global ballx,bally, balldirec,balldirecy, ballrect, ballrectx, playdirec, endirec, playX, oppX, ballspeed, ballyadd
+    global ballx,bally, balldirec,balldirecy, ballrect, ballrectx, playdirec, endirec, playX, oppX, ballspeed, ballyadd, playS, oppS, screenw
 
     #PLAYER based bounce back
 
@@ -113,6 +109,13 @@ def ball_ai():
         balldirecy = ballspeed
     elif ballrect.bottom > screenh:
         balldirecy = -(ballspeed)   # bottom boundary
+
+    # SCORES SYSTEM
+
+    if ballrect.left < 0:
+        playS += 1
+    elif ballrect.right > screenw:
+        oppS += 1
         
         
 def enemyai():
@@ -129,6 +132,13 @@ while gameactive:
     ballrecty = bally - ballrad
 
     ballrect = pygame.Rect(ballrectx, ballrecty, (ballrad * 2), (ballrad * 2))
+
+    playS = 0
+    oppS = 0
+
+    #SCORES
+    playerscore = myFONT.render(f'{playS}', False, 'white')
+    enemyscore = myFONT.render(f'{oppS}', False, 'white')
     
 
     # MAIN EVENT LOOP and CONTROLS
