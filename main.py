@@ -6,6 +6,10 @@
 
 # GAME SHUTDOWN DEADLINE TILL SUNDAY OF MAY so 1 whole week to properly do this complex game bec its really good knowledge
 
+# GAME DEV STOPPED ON MAY 3 SUNDAY, I could'nt implement a lot of features that i wanted and so this again is an unfinished broken game,
+# BUT i will try to complete tutorials now and I'll come back stronger with more knowledge
+# BYEE PONG!!!
+
 import pygame
 from sys import exit
 import random
