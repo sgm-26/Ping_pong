@@ -119,9 +119,33 @@ def ball_ai():
         
         
 def enemyai():
-    #global ballx,bally, balldirec,balldirecy, ballrect, ballrectx, oppdirec
+    global ballx,bally, balldirec,balldirecy, ballrect, ballrectx, endirec
     #moved all enemy ball logic to ball ai bec i realised all ball logic should be there only
-    pass
+
+    # RANDOM TRY
+    test = False
+    if test == True:
+        # 1st test using random
+        choices = ['up', 'down']
+        MoveF = random.choice(choices)
+        if MoveF == 'up':
+            enemyrect.y -= 20
+            endirec = 'up'
+        elif MoveF == 'down':
+            enemyrect.y += 20
+            endirec = 'down'
+
+        # 2nd test
+        if ballrect.y < 300:
+            #move up 
+            enemyrect.y -= 20
+            endirec = 'up'
+        elif ballrect.y > 300:
+            #move down
+            enemyrect.y += 20
+            endirec = 'down'
+    
+    
 
     
 #MAIN GAME WHILE LOOP
