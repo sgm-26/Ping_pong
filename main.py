@@ -9,9 +9,13 @@
 import pygame
 from sys import exit
 
+pygame.init()
 #ALL VARIABLES AND DECLARATION/CREATION OF STUFF
 
 gameactive = True
+myFONT = pygame.font.Font(None, 70)
+playS = 0
+oppS = 0
 difficulty = 'hard'
 ballserve = "player"
 
@@ -23,12 +27,16 @@ clock = pygame.time.Clock()
 
 # MAIN RECTANGLES
 # player and enemy adjustable x positions
-playX = 800 
+playX = 750
 oppX = 100
-playY = oppY = 200
-playerheight = enemyheight = 150
+playY = oppY = 250
+playerheight = enemyheight = 120
 playerrect = pygame.Rect(playX,playY, 50, playerheight)
 enemyrect = pygame.Rect(oppX,oppY, 50, enemyheight)
+
+#SCORES
+playerscore = myFONT.render(f'{playS}', False, 'white')
+enemyscore = myFONT.render(f'{oppS}', False, 'white')
 
 playdirec = 'still'
 endirec = 'still'
@@ -156,9 +164,15 @@ while gameactive:
     if gameactive == True:
         #draw all entities
 
+        # SCORES
+        screen.blit(playerscore, (300, 100))
+        screen.blit(enemyscore, (600, 100))
+
+        # BALL
         pygame.draw.rect(screen, 'white', ballrect) #hitbox rect of ball
         pygame.draw.circle(screen, 'yellow', (ballx, bally), ballrad) #main ball
 
+        # BOARDS
         pygame.draw.rect(screen, 'orange', playerrect) # player board
         pygame.draw.rect(screen, 'orange', enemyrect) # opp board
         #print("balldirec x:", balldirec)
