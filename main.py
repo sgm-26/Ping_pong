@@ -10,6 +10,8 @@
 # BUT i will try to complete tutorials now and I'll come back stronger with more knowledge
 # BYEE PONG!!!
 
+# wait finally came back on may 10 to actually test how to export programs as exe files
+
 import pygame
 from sys import exit
 import random
