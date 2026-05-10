@@ -194,6 +194,11 @@ while gameactive:
             elif event.key == pygame.K_ESCAPE:
                 pygame.quit
                 exit()
+            elif event.key == pygame.K_SPACE:
+                ballx = (screenw / 2) # resetting ball if it goes out of screen
+                bally = (screenh / 2)
+                ballx += balldirec
+                bally += balldirecy
         if event.type == pygame.MOUSEMOTION:
             mousepos = event.pos
             #print(mousepos)  # only for debug or finding correct placement, not really needed that much
